@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant "AdminUI" as AU
+participant "Server" as S
+
+group if auto-update enabled
+    S -> S: Start
+    alt update successful
+        S -> S: Perform Update
+    else update failed - version mismatch
+        S -> AU: Error 306/106 Version Mismatch
+    end
+end
+
+alt update/reset requested by AdminUI
+    AU -> S: update/reset
+    alt success
+        S --> AU: 0
+    else failure
+        S --> AU: -1
+    end
+end
+
+@enduml

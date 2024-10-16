@@ -1,0 +1,10 @@
+{
+  "Name": "ACCESS_POLICY_TYPE",
+  "NeedProvider": false,
+  "Version": 1,
+  "Values": [
+    "DENY_ACCESS",
+    "ALLOW_ACCESS_ACCORDING_TO_EMP_SCHEDULE",
+    "ALLOW_ACCESS_ACCORDING_TO_EMP_SCHEDULE_AND_AP_RULES"
+  ]
+}

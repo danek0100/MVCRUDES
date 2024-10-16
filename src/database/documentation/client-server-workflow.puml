@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant "Client"
+participant "Server"
+
+alt if not logged in
+    Client -> Server: HelloRequest
+    Server --> Client: HelloReply + EntitiesStructures
+else if logged in
+    Client -> Server: JsonEntitiesRequest
+    Server --> Client: EntitiesStructures
+end
+
+... some time later ...
+
+Client -> Server: SUBSCRIBE
+Server --> Client: OK
+
+... some time later ...
+
+loop CRUD operations
+    Client -> Server: CRUD operation
+    Server --> Client: Event/Data Response
+end
+@enduml

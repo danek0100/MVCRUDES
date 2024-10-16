@@ -1,0 +1,308 @@
+@startuml
+
+title Диаграмма классов универсального провайдера
+
+class JSONs {
+}
+
+class Entities {
+    -fields : Json::Array
+}
+
+class Defaults {
+    -fieldName : string
+    -value : Json::Value
+}
+
+JSONs <|-- Entities
+JSONs <|-- Defaults
+
+class StructureField {
+    -features : unordered_map<string, Json::Value>
+    +get(key : string) : Json::Value
+    +put(key : string, value : Json::Value) : void
+    +getKeys() : vector<string>
+}
+
+
+class EntityScheme {
+    -name : string
+    -version : int
+    -needProvider : bool
+}
+
+class EnumTypeScheme extends EntityScheme {
+    -values : vector<string>
+}
+
+class TableScheme extends EntityScheme {
+    -fields : vector<StructureField>
+    -relations : unordered_map<string, string>
+    -indexes : vector<string>
+    -databaseEngines : unordered_map<string, string>
+}
+
+TableScheme "1" *-- "many" StructureField : contains >
+
+class SchemeReader {
+    -jsonsDirectoryPath : string
+    -schemaCache : std::unordered_map<string, list<EntityScheme>>
+    +readSchemes(directoryPath : string) : list<EntityScheme>
+    +readScheme(filePath : path) : EntityScheme
+    +readAllEntities(directoryPath : string) : unordered_map<string, list<JsonEntity>>
+    +readEntities(filePath : path) : list<JsonEntity>
+    +getDefaultJsonsDirectoryPath() : string
+    {static} +Singleton
+}
+
+SchemeReader "1" *-- "many" TableScheme : contains >
+
+interface CustomUpdate {
+    +update() : int
+    +~CustomUpdate()
+}
+
+class CustomUpdateFactory {
+    {static} -getRegistry() : map<string, function<CustomUpdate*()>>;
+    {static} +createUpdate(updateName : string) : CustomUpdate*
+    {static} +registerUpdate(updateName : string, constructor : function<CustomUpdate*()>) : bool
+}
+
+CustomUpdateFactory "1" *-- "many" CustomUpdate : contains >
+
+class DbUpdater {
+    {static} +ACTUAL_CUSTOM_VERSION = 372;
+    +update(currentVersion :int) : int
+    {static} +Singleton
+}
+
+DatabaseManager ..> DbUpdater : update >
+
+class DbStructureUpdater {
+    -addedEntities : list<string>
+    +updateStructures() : void
+    +updateStructuresForCustom(customUpdateVersion : int) : void
+    +getAddedEntities() : list<string>
+    {static} +Singleton
+}
+
+DbUpdater ..> CustomUpdateFactory : registerUpdate >
+DbUpdater ..> DbStructureUpdater : updateStructures >
+DbUpdater ..> DbStructureUpdater : getAddedEntities >
+DbUpdater ..> DatabaseManager : addDefaults >
+CustomUpdate ..> DbStructureUpdater : updateStructuresForCustom >
+
+class Main {
+    ...
+}
+
+Main ..> DatabaseManager : resetTables >
+Main ..> DatabaseManager : update >
+
+class EntitiesStructureCache {
+    -enumTypesValuesCache : unordered_map<string, vector<string>>
+    -fieldsCache : unordered_map<string, vector<StructureField>>
+    -typesCache : unordered_map<string, unordered_map<string, string>>
+    -providerCache : unordered_map<string, bool>
+    -versionsCache : unordered_map<string, int>
+    +isTypeEnum(key : string) : bool
+    +getEnumValues(key : string) : vector<string>
+    +getFields(key : string) : vector<StructureField>
+    +getFieldsTypes(key : string) : unordered_map<string, string>
+    +getKeys() : vector<string>
+    +isNeedProvider(entityName : string) : bool
+    +getVersion(entityName : string) : int
+    +loadCache(directoryPath : string) : void
+    {static} +Singleton
+}
+
+EntitiesStructureCache ..> SchemaReader : loadCache >
+EntitiesStructureCache "1" *-- "many" StructureField : contains >
+EntitiesStructureCache "1" o-- "many" Entities : manages >
+
+class GateHandler {
+    +processIncomingJsonEntitiesRequest(message : Message*, trId : int) : void
+    +processIncomingRequest_Hello(message : Message*, trId : int) : void
+    ...
+}
+
+GateHandler ..> EntitiesStructureCache : uses >
+
+interface IDatabaseController {
+    +createDatabase(dbName : string) : void
+    +dropDatabase(dbName : string) : void
+    +createTable(schema : TableScheme) : int
+    +dropTable(tableName : string) : int
+    +insertTableVersion(tableName : string, version : int) : int
+    +getEntityVersion(tableName : string) : int
+    +getActualScheme(tableName : string) : TableScheme
+    +updateCurrentScheme(oldScheme : TableScheme, newScheme : TableScheme) : int
+    +getMappedType(typeName : string, length : int) : string
+    +getUnmappedType(typeString : string) : string
+    +adaptValueToType(typeName : string, value : Json::Value) : string
+    +loadEntities(tableName : string, filter : Json::Value, fields : vector<string>) : list<JsonEntity>
+    +addEntities(objects : list<JsonEntity>) : void
+    +updateEntities(objects : list<JsonEntity>) : list<JsonEntity>
+    +removeEntity(objects : list<JsonEntity>) : void
+    +{abstract} ~IDatabaseController()
+}
+
+IDatabaseController ..> EntitiesStructureCache : uses >
+IDatabaseController ..> TableScheme : uses >
+IDatabaseController ..> JsonEntity : uses >
+
+class DatabaseManager {
+    -jsonsPath : string
+    -databaseController : unique_ptr<IDatabaseController>
+    +getDatabaseController() : unique_ptr<IDatabaseController>
+    +resetTables() : int
+    +initTable(scheme : TableScheme) : int
+    +update(currentDbVersion : int) : int
+    +createVersionsTable() : int
+    +addDefaults(entitiesNames : list<std::string>) : int
+    {static} +Singleton
+}
+
+DatabaseManager ..> SchemaReader : uses >
+DatabaseManager ..> IDatabaseController : use, hold and provide >
+
+interface DB {
+    -ALL DATA
+}
+
+IDatabaseController ..> DB : CRUD operations >
+IDatabaseController ..> DB : tables manipulations >
+
+class ObjectsSpeaker<T> {
+    -mutexSubscribers : Mutex
+    -subscribers : list<ObjectsSubscriber<T>>
+    +EVENT_ADD : uint32_t {static}
+    +EVENT_UPDATE : uint32_t {static}
+    +EVENT_REMOVE : uint32_t {static}
+    +ObjectsSpeaker()
+    +addSubscriber(subscriber : ObjectsSubscriber<T>) : void
+    +removeSubscriber(subscriber : ObjectsSubscriber<T>) : void
+    +isSubscriber(subscriber : ObjectsSubscriber<T>) : bool
+    +getEventName(event : uint32_t) : string {static}
+    #notifySubscribers(event : uint32_t, data : T) : void
+}
+
+interface SimpleGateJsonEntityProvider<T> {
+    +SimpleGateJsonEntityProvider(_provider : JsonProviderWithFilteredSpeaker<T>, gateCode : int)
+    +onIncomingRequest(gate : GateHandler, incomingMessage : Message, trId : int) : void
+    +removeGateSubscriber(gate : GateHandler) : void
+    +dataToJson(data : T) : Json::Value
+    +jsonToData(json : Json::Value) : T
+}
+
+class JsonEntityGateProvider {
+    -JsonEntityGateProvider()
+    +dataToJson(data : JsonEntity) : Json::Value
+    +jsonToData(json : Json::Value) : JsonEntity
+    {static} +Singleton
+}
+
+JsonEntityGateProvider --|> SimpleGateJsonEntityProvider
+SimpleGateJsonEntityProvider --|> ObjectsSpeaker
+
+interface RegularTask
+
+class EntitiesCacheActualizationTask {
+    -EntitiesCacheActualizationTask()
+    -~EntitiesCacheActualizationTask()
+    +get() : EntitiesCacheActualizationTask*
+    +execute() : bool
+}
+
+EntitiesCacheActualizationTask --|> RegularTask
+
+interface JsonProviderWithFilteredSpeaker<T> {
+    +create(objects : list<T>) : T
+    +read(type : string, filter : Json::Value, fields : vector<string>) : list<T>
+    +update(objects : list<T>) : void
+    +remove(objects : list<T>) : void
+    +createImpl(objects : list<T>) : void
+    +readImpl(type : string, filter : Json::Value, fields: vector<string>, forceRead : bool) : list<T>
+    +updateImpl(objects : list<T>)  : list<T>
+    +removeImpl(objects : list<T>)  : void
+}
+
+
+class JsonEntityProvider {
+    -database : unique_ptr<IDatabaseController>
+    -JsonEntityProvider()
+    +createImpl(objects : list<JsonEntity>) : void
+    +readImpl(entityName : string, filter : Json::Value, fields : vector<string>, forceRead : bool) : list<JsonEntity>
+    +updateImpl(objects : list<JsonEntity>) : list<JsonEntity>
+    +removeImpl(objects : list<JsonEntity>) : void
+    +notifyProviderAboutChanges(event : uint32_t, object : JsonEntity) : void
+    +fillEntity(object : JsonEntity) : void
+    +checkEntity(object : JsonEntity) : void
+    {static} +Singleton
+}
+
+JsonEntityProvider --|> JsonProviderWithFilteredSpeaker
+
+JsonEntityProvider ..> IDatabaseController : uses for CRUD
+JsonEntityProvider ..> EntitiesStructureCache : uses for entity validation
+JsonEntityGateProvider --> JsonEntityProvider : sends CRUD requests
+JsonEntityProvider --> JsonEntityGateProvider : return filtered data
+JsonEntityProvider --> JsonEntityGateProvider : notifies subscribed clients
+
+class JsonEntity {
+    -entityName : string
+    -key : int
+    -value : unordered_map<string, Json::Value>
+    +JsonEntity(_entityName : string, _key : int, _value : unordered_map<string, Json::Value>)
+    +JsonEntity(data : Json::Value)
+    +operator==(x : JsonEntity) : bool
+    +operator!=(x : JsonEntity) : bool
+    +toJson() : Json::Value
+}
+
+class EntitiesCache {
+    -cachedEntitiesNames : unordered_set<string>
+    -database : unique_ptr<IDatabaseController>
+    -dataMutexes : unordered_map<string, unique_ptr<Mutex>>
+    -data : unordered_map<string, list<JsonEntity>>
+    -EntitiesCache()
+    +hasCache(entityName : string) : bool
+    +getCache(entityName : string) : list<JsonEntity>
+    +addEntity(object : JsonEntity) : void
+    +removeEntity(object : JsonEntity) : void
+    +updateEntity(object : JsonEntity) : void
+    +calculateData() : void
+    +loadData(entityName : string) : list<JsonEntity>
+    {static} +Singleton
+}
+
+EntitiesCache --|> SingleShotTaskDataUpdater
+EntitiesCache "1" *-- "many" JsonEntity : stores >
+EntitiesCacheActualizationTask --> EntitiesCache : updates every 5s >
+JsonEntityProvider ..> EntitiesCache : uses cache >
+EntitiesCache ..> JsonEntityProvider : notify about data changes >
+
+class JsonEntityListener {
+    -mutexSubscribers : Mutex
+    -subscribers : list<JsonEntitySubscriber>
+    -JsonEntityListener()
+    +EVENT_ADD : uint32_t {static}
+    +EVENT_UPDATE : uint32_t {static}
+    +EVENT_REMOVE : uint32_t {static}
+    getEventName(event : uint32_t) : string {static}
+    +addSubscriber(subscriber : JsonEntitySubscriber) : void
+    +removeSubscriber(subscriber : JsonEntitySubscriber) : void
+    +isSubscriber(subscriber : JsonEntitySubscriber) : bool
+    #notifySubscribers(event : uint32_t, data : JsonEntity) : void
+    {static} +Singleton
+}
+
+JsonEntityProvider --> JsonEntityListener : notifies about changes
+JsonEntityListener --> EntitiesCache : notifies about CUD operations
+
+class Globals
+
+JsonEntityListener --> Globals : notifies about CUD operations
+Globals --> JsonEntityProvider : CRUD operations
+
+@enduml

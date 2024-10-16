@@ -1,0 +1,22 @@
+{
+  "Name": "PARAMI",
+  "NeedProvider": true,
+  "Version": 1,
+  "Fields": [
+    {
+      "Name": "NAME",
+      "Type": "String",
+      "Length": 250
+    },
+    {
+      "Name": "PARAMVALUE",
+      "Type": "Number",
+      "DefaultValue": 0
+    }
+  ],
+  "UniqueFieldsSets": [
+    [
+      "NAME"
+    ]
+  ]
+}

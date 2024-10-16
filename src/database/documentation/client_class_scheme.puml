@@ -1,0 +1,116 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class JsonEntity {
+    -name : String
+    -key : int
+    -value : JSONObject
+
+    +JsonEntity(name : String, key : int, value : JSONObject)
+    +toString() : String
+    +getName() : String
+}
+
+class JsonEntitiesStructuresHolder {
+    -instance : JsonEntitiesStructuresHolder {static}
+    -entities : Map<String, JSONObject>
+    -needInit : boolean {volatile}
+    -JsonEntitiesStructuresHolder()
+
+    +getInstance() : JsonEntitiesStructuresHolder {static}
+    +updateStructuresFromServer() : void
+    +init(structures : JSONObject) : void
+    +getAvailableEntities() : Set<String>
+    +getEntityStructure(entityName : String) : JSONObject
+
+    #loadDataFromServer() : void
+    #createEntityRequest() : Message
+    #parseEntities(jsonObject : JSONObject) : void
+    #parseEntity(entity : JSONObject) : void
+}
+
+JsonEntity ..> JsonEntitiesStructuresHolder : temp: uses structures for equals and hashcode >
+
+abstract class JsonEntityGateProvider<T> {
+    -gateCode : int
+    -JsonEntityGateProvider(gateCode : int)
+
+    +getProviderListeners() : List<FilteredCallback<T>>
+    +addProviderListener(listener : FilteredCallback<T>) : void
+    +removeProviderListener(listener : FilteredCallback<T>) : void
+    #notifyProviderListeners(event : Event, t : T) : void
+    +create(object : T) : T
+    +read(type : String, filter : JsonFilter) : ArrayList<T>
+    +update(object : T) : void
+    +remove(object : T) : void
+    #getGateCode() : int
+    #dataToJson(data : T) : JSONObject
+    #jsonToData(json : JSONObject) : T
+}
+
+abstract class FilteredCallback<T> {
+    -filter : JsonFilter
+
+    +FilteredCallback(filter : JsonFilter)
+    +call(event : Event, t : T) : void
+}
+
+JsonEntityGateProvider "1" o-- "*" FilteredCallback : sends CUD events to listeners >
+
+class JsonEntityProvider {
+    -instance : JsonEntityProvider {static}
+    -needInit : boolean
+    -JsonEntityProvider()
+
+    +dataToJson(data : JsonEntity) : JSONObject
+    +jsonToData(json : JSONObject) : JsonEntity
+    +getInstance() : JsonEntityProvider {static}
+
+    #init() : void
+    #setupServerListener() : void
+    #handleServerMessage(message : Message) : void
+}
+
+JsonEntityProvider --|> JsonEntityGateProvider
+
+class Globals {
+    -GLOBALS_ENTITIES : List<String> {static}
+    -paramCache : ConcurrentHashMap<String, ConcurrentHashMap<String, JsonEntity>> {static}
+    -INSTANCE : Globals {static}
+    -needInit : boolean
+    -Globals()
+
+    +get() : Globals {static}
+    +getInt(param : String) : int
+    +computeIfAbsentInt(param : String, supplier : Supplier<Integer>) : int
+    +getString(param : String) : String
+    +computeIfAbsentString(param : String, supplier : Supplier<String>) : String
+    +setInt(param : String, value : int) : void
+    +setString(param : String, value : String) : void
+    +call(event : Event, entity : JsonEntity) : void
+
+    #initializeCache() : void
+    #createJsonFilter() : JsonFilter {static}
+    #setParam(param : String, entityName : String, value : Object) : void
+    #updateCache(event : Event, entity : JsonEntity) : void
+}
+
+Globals --|> FilteredCallback
+Globals ..|> EntityNotifier
+Globals ..> JsonEntityProvider : uses for CRUD operations >
+Globals "1" *-- "many" JsonEntity : stores >
+
+class DevelFrame {
+    - editors
+
+    + generateEditors(entityName : String, structures : JSONObject) : editors
+    + createEntity(entityName : String)
+    + readEntity(entityName : String)
+    + updateEntity(entityName : String)
+    + deleteEntity(entityName : String)
+}
+
+DevelFrame ..> JsonEntityProvider : uses for CRUD operations >
+DevelFrame ..> JsonEntitiesStructuresHolder : retrieves structures >
+
+@enduml

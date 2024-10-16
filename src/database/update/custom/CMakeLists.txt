@@ -1,0 +1,7 @@
+list(APPEND CORE_LIB_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/CustomUpdateFactory.cpp
+)
+
+add_subdirectory(373)
+
+set(CORE_LIB_SOURCES ${CORE_LIB_SOURCES} PARENT_SCOPE)

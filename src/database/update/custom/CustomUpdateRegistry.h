@@ -1,0 +1,8 @@
+#ifndef SPHINXD_CUSTOMUPDATES_H
+#define SPHINXD_CUSTOMUPDATES_H
+
+
+#include "./373/CustomUpdate373.h"
+
+
+#endif //SPHINXD_CUSTOMUPDATES_H

@@ -1,0 +1,833 @@
+{
+  "Name": "PARAMI",
+  "DefaultValues": [
+    {
+      "NAME": "DBVER",
+      "PARAMVALUE": 373
+    },
+    {
+      "NAME": "DBVER_INITIAL",
+      "PARAMVALUE": 373
+    },
+    {
+      "NAME": "APB_TIME",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "ID_AUTOPARK",
+      "PARAMVALUE": -1
+    },
+    {
+      "NAME": "ID_OFFICIAL_TRANSPORT",
+      "PARAMVALUE": -1
+    },
+    {
+      "NAME": "ID_PERSONAL_TRANSPORT",
+      "PARAMVALUE": -1
+    },
+    {
+      "NAME": "ID_GUESTS",
+      "PARAMVALUE": -1
+    },
+    {
+      "NAME": "ID_GUEST_BADGE",
+      "PARAMVALUE": -1
+    },
+    {
+      "NAME": "DEF_GUEST_EXPTIME",
+      "PARAMVALUE": 480
+    },
+    {
+      "NAME": "ID_DEFAULT_RULE",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "AUTOMAINTENANCE_START_TIME",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "AUTOBACKUP_ON",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "AUTOBACKUP_PERIOD",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "AUTOBACKUP_STORAGESIZE",
+      "PARAMVALUE": 10
+    },
+    {
+      "NAME": "AUTOCHECKDB_ON",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "AUTOCLEANUP_ARCHIVE_ON",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "AUTOCLEANUP_ARCHIVE_DEPTH",
+      "PARAMVALUE": 60
+    },
+    {
+      "NAME": "AUTOCLEANUP_VIDEO_ON",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "AUTOCLEANUP_VIDEO_DEPTH",
+      "PARAMVALUE": 7
+    },
+    {
+      "NAME": "PAYDESK_FONT_SIZE",
+      "PARAMVALUE": 12
+    },
+    {
+      "NAME": "PAYDESK_USEHTML",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "PAYDESK_LITE_SHOWEMPINFO",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "PAYDESK_LITE_STATUSLINE",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "PAYDESK_LITE_REJECT_REASON1",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "PAYDESK_LITE_REJECT_REASON2",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "PAYDESK_LITE_REJECT_REASON3",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "PAYDESK_LITE_REJECT_REASON4",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "PAYDESK_LITE_REJECT_REASON5",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "PAYDESK_LITE_REJECT_REASON6",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SMS_SUPRESS_MPASSES_ENABLE",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SMS_SUPRESS_MPASSES_DELAY",
+      "PARAMVALUE": 15
+    },
+    {
+      "NAME": "SMS_SUPRESS_PASSBACK_ENABLE",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SMS_SUPRESS_PASSBACK_DELAY",
+      "PARAMVALUE": 15
+    },
+    {
+      "NAME": "SMS_SEND_OFFLINE",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "SMS_LIMIT_LEN",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "PAY_CHECK_NUMBER",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "AD_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "PERSONALTAB_SIDEPRM_ON_COMMON",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "SPHINX_ETHERNET_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SS_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SS_EMP_PERIOD",
+      "PARAMVALUE": 900
+    },
+    {
+      "NAME": "SS_LOG_LASTID",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SS_LOG_USE_PASS",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "SS_LOG_USE_DENY",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SS_LOG_USE_NOID",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SS_PAYLOG_LASTID",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "ARCHIVE_COL_DEP",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SYNCDB_REQUEST_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SYNCDB_REQUEST",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SYNCDB_REQUEST_MINDELAY",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SYNCDB_REQUEST_POLICY",
+      "PARAMVALUE": 3
+    },
+    {
+      "NAME": "LPR_DELAY_TIMEOUT",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "DNEVNIKRU_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "DNEVNIKRU_LOG_LASTID",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "GUEST_CLOSEONEXIT_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "GUEST_ONLYSIGNEDAPPL",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "GUEST_REQUIREAPPL",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "GUEST_BLOCKEMPWHILEGUEST",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "GUEST_QR_CODES_SEND_EMAIL",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "GUEST_QR_CODES_PUT_TO_MOXA_SIDEPARAMS",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "ONECV77_ENABLED",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "AXIS2_PROXY_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "AXIS2_PROXY_AUTH_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "AXIS2_PROXY_PORT",
+      "PARAMVALUE": 8080
+    },
+    {
+      "NAME": "BS_FP_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "BS_PV_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "BIOSMART_IS_LOCAL",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "BIOSMART_SERVER_PORT",
+      "PARAMVALUE": 20005
+    },
+    {
+      "NAME": "BIOSMART_IDENTITY_TYPE",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "BIOSMART_LOCAL_WO_TEMPLATE",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "PARKING_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "PAYDESK_SHOW_AVAIL_ITEMS_ONLY",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "PAY_GRID_CELL_SIZE",
+      "PARAMVALUE": 100
+    },
+    {
+      "NAME": "PAY_GRID_CELL_FONT_SIZE",
+      "PARAMVALUE": 16
+    },
+    {
+      "NAME": "PAY_REPORTS_USE_DEPID",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SALTO_SHIP_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SALTO_SHIP_PORT",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SALTO_EVENT_STREAM_UDP_PORT",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SALTO_LAST_RECEIVED_EVENT_ID",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "EXTDBSYNC_RULES_POWERLMT",
+      "PARAMVALUE": 12
+    },
+    {
+      "NAME": "EXTDBSYNC_RULES_AUTOPWR",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_C_BLOCK",
+      "PARAMVALUE": 4
+    },
+    {
+      "NAME": "MF_C_PARITY",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_C_REVERSE",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_C_SOAA_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_C_SOAA_FIRST_BLOCK",
+      "PARAMVALUE": 8
+    },
+    {
+      "NAME": "MF_C_SOAA_LAST_BLOCK",
+      "PARAMVALUE": 62
+    },
+    {
+      "NAME": "MF_DF_FID",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_DF_OFFSET",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_DF_APP_KEY_NUMBER",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "MF_P_BLOCK",
+      "PARAMVALUE": 4
+    },
+    {
+      "NAME": "MF_OTHER_READ_UID",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "EMAIL_SMTP_PORT",
+      "PARAMVALUE": 25
+    },
+    {
+      "NAME": "EMAIL_SMTP_SSL",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "EMAIL_SMTP_AUTH",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "APERIO_LOCKS_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "APERIO_LOCKS_PORT",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "ZK_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "AD_LOGIN_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "EVACREP_ACTTIME",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "EL_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "DOCREC_SAVEDOCIMG",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "FACE_TVA_ON",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "FACE_INPUT_W",
+      "PARAMVALUE": 800
+    },
+    {
+      "NAME": "FACE_INPUT_H",
+      "PARAMVALUE": 600
+    },
+    {
+      "NAME": "FACE_RECT_MIN",
+      "PARAMVALUE": 5
+    },
+    {
+      "NAME": "FACE_RECT_MAX",
+      "PARAMVALUE": 95
+    },
+    {
+      "NAME": "FACE_DET_THR",
+      "PARAMVALUE": 80
+    },
+    {
+      "NAME": "FACE_REC_THR",
+      "PARAMVALUE": 80
+    },
+    {
+      "NAME": "FACE_ID_N1",
+      "PARAMVALUE": 5
+    },
+    {
+      "NAME": "FACE_ID_N2",
+      "PARAMVALUE": 5
+    },
+    {
+      "NAME": "FACE_ID_T1",
+      "PARAMVALUE": 5000
+    },
+    {
+      "NAME": "APL_TIME",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "HWTAB_SHOW_PINS",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "ANVIZ_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "HTTP_PROXY_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "HTTP_PROXY_PORT",
+      "PARAMVALUE": 8080
+    },
+    {
+      "NAME": "HTTP_PROXY_AUTH_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "WEBDEL_AUTH_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "WEBDEL_LOG_LASTID",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "EXTDBSYNC_DEL_EMPTY_DEPS",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "PASSPOLICY_REQDIGIT",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "PASSPOLICY_REQLETTER",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "PASSPOLICY_REQDIFFCASES",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "PASSPOLICY_REQSPECCHARS",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "PASSPOLICY_MINLENGTH",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SV_OFFICEMODE_AUTORELEASE",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "ANVIZ_ATTMODE",
+      "PARAMVALUE": 6
+    },
+    {
+      "NAME": "KEYGUARD_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_BLE_TAG_DISTANCE",
+      "PARAMVALUE": 25
+    },
+    {
+      "NAME": "MF_BLE_TAG_POLICY",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "EMAILRCV_PORT",
+      "PARAMVALUE": 143
+    },
+    {
+      "NAME": "EMAILRCV_SSL",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "VZOR_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "VZOR_PG_PORT",
+      "PARAMVALUE": 5432
+    },
+    {
+      "NAME": "VZOR_MQTT_PORT",
+      "PARAMVALUE": 1883
+    },
+    {
+      "NAME": "BADGE_DB267PORTSUPPRESS",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "ISBC_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_W26_FACILITY_VISIBLE",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_W26_FACILITY_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_W26_FACILITY",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "EMPIDLE_TIME",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MISC_LOCKERS_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MISC_MOLOCKERS_TIMEOUT_ENABLED",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "MISC_MOLOCKERS_EXIT_BEHAVIOR",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MISC_MOLOCKERS_TIMEOUT_ACTION",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MISC_MOLOCKERS_UNLOCK_TIME",
+      "PARAMVALUE": 10
+    },
+    {
+      "NAME": "MISC_MOLOCKERS_AP_SMALL",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MISC_MOLOCKERS_AP_BIG",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MISC_MOLOCKERS_MAX_OCC_TIME",
+      "PARAMVALUE": 86400
+    },
+    {
+      "NAME": "MF_P_SL1_TREAT_AS_CLASSIC",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "BASIP_WEB_SERVICE_PORT",
+      "PARAMVALUE": 8181
+    },
+    {
+      "NAME": "BASIP_WEB_SERVICE_ENABLED",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "HIKVISION_TERMINAL_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "HIK_COMPRESSION_ENABLED",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "HIK_COMPRESSION_ATTEMPTS_NUM",
+      "PARAMVALUE": 5
+    },
+    {
+      "NAME": "HIK_COMPRESSION_SIZE",
+      "PARAMVALUE": 198000
+    },
+    {
+      "NAME": "HIK_THERMAL_SERVICE_HTTP_PORT",
+      "PARAMVALUE": 8080
+    },
+    {
+      "NAME": "MATRIX_LOCKS_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MATRIX_REST_PORT",
+      "PARAMVALUE": 8080
+    },
+    {
+      "NAME": "MATRIX_REST_MANDATOR",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "MATRIX_REST_INTERFACE",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "MATRIX_DB_PORT",
+      "PARAMVALUE": 1433
+    },
+    {
+      "NAME": "DAEDETECTOR_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "DAEDETECTOR_AP1_ID",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "DAEDETECTOR_AP2_ID",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "DAEDETECTOR_PORT",
+      "PARAMVALUE": 21
+    },
+    {
+      "NAME": "MISC_BARCODE",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MISC_MOXA_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "AMQP_LAST_SYSTEMLOG_ID",
+      "PARAMVALUE": -1
+    },
+    {
+      "NAME": "MF_EMM_ENABLED",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "MF_EMM_FIXED_FACILITY_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_EMM_FIXED_FACILITY",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_EMV_PAN_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_EMV_PAN_ENCODING",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_HID_ENABLED",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "MF_HID_FIXED_FACILITY_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_HID_FIXED_FACILITY",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SIGUR_WEB_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_C_OFFSET",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MR_CARD_HOLD_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_P_BY_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_P_BY_SECTOR",
+      "PARAMVALUE": 31
+    },
+    {
+      "NAME": "MF_P_REVERSE",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "USE_CODEKEY_DESC",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "ARCHIVE_COL_CODEKEY",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "ARCHIVE_COL_CODEKEY_DESC",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "SALTO_UNLOCK_KEY_EDITING",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "BEWARD_SERVICE_HTTP_PORT",
+      "PARAMVALUE": 10892
+    },
+    {
+      "NAME": "MATRIX_CARD_TYPE",
+      "PARAMVALUE": 3
+    },
+    {
+      "NAME": "BS_QUASAR_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "ZKTECO_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_EMV_PAN_SHA1_OFFSET",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_EMV_PAN_SHA256_OFFSET",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MF_C_ENABLE",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "MF_P_ENABLED",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "MF_DF_ENABLED",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "MISC_DOMA_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "MISC_DOMA_SYNCPERIOD",
+      "PARAMVALUE": 30
+    },
+    {
+      "NAME": "MISC_DOMA_DEFAULT_RULE_ID",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "MISC_DOMA_DEL_POLICY",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "OAUTH_ENABLED",
+      "PARAMVALUE": 0
+    },
+    {
+      "NAME": "OAUTH_CERTS_ENABLED",
+      "PARAMVALUE": 1
+    },
+    {
+      "NAME": "OAUTH_CONFIGURATION_TIMEOUT",
+      "PARAMVALUE": 60
+    },
+    {
+      "NAME": "OAUTH_JWKS_REQUEST_TIMEOUT",
+      "PARAMVALUE": 60
+    },
+    {
+      "NAME": "OAUTH_LOGIN_TIMEOUT",
+      "PARAMVALUE": 60
+    },
+    {
+      "NAME": "QR_CODE_PERSONAL_ID",
+      "PARAMVALUE": -1
+    }
+  ]
+}
