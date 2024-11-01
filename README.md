@@ -30,6 +30,7 @@ Streams:
 -- Think about: WebSocket, HTTP (base) + Reactive (batch streaming).
 
 Optional:
+- PowerFull filtering
 - Smart Cache
 - Compression of Jsons.
 - Codegen
